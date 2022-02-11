@@ -28,17 +28,18 @@ const Mongo_URL = process.env.Mongo_URL;
 
 //setting port
 const PORT = process.env.PORT;
-
+console.log(PORT, Mongo_URL);
 //connecting to mongoDB through mongoose
 
 //method - 1
-mongoose.connect(Mongo_URL);
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Database connected"));
-app.listen(PORT, () => console.log("PORT connected"));
+// mongoose.connect(Mongo_URL);
+// const db = mongoose.connection;
+// db.on("error", (error) => console.error(error));
+// db.once("open", () => console.log("Database connected"));
+// app.listen(PORT, () => console.log("PORT connected"));
 
 //method - 2
-// mongoose.connect(Mongo_URL,{useNewUrlParser:true, useUnifiedTopology:true})//what this for..?
-// .then(()=>app.listen(PORT,()=>console.log("PORT connected")))
-// .catch((error)=>console.log(error.message))
+mongoose
+  .connect(Mongo_URL, { useNewUrlParser: true, useUnifiedTopology: true }) //what this for..?
+  .then(() => app.listen(PORT, () => console.log("PORT connected")))
+  .catch((error) => console.log(error.message));
